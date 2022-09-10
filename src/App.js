@@ -1,25 +1,27 @@
 import logo from './logo.svg';
 import './App.css';
-
 function App() {
+  player()
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <p>{player()}</p>
     </div>
   );
 }
-
+// Find players with three properties (name , team , season) in a player object return any players with matching properties
+function player() {
+  const options = {
+    method: 'GET',
+    headers: {
+      'X-RapidAPI-Key': 'c192a14e1amshfe6b230eab1a666p193894jsnf81b950f0ee9',
+      'X-RapidAPI-Host': 'free-nba.p.rapidapi.com'
+    }
+  };
+  
+  fetch('https://free-nba.p.rapidapi.com/players?page=98&per_page=25', options)
+    .then(response => response.json())
+    .then(response => console.log(response.data))
+    .catch(err => console.error(err))
+    
+}
 export default App;
